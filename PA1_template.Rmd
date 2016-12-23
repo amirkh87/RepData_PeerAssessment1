@@ -1,3 +1,9 @@
+---
+output: 
+  html_document: 
+    self_contained: no
+---
+
 #My 1st Knit Project
 
 ```{r,echo=FALSE}
@@ -10,7 +16,7 @@ options(scipen=999)
 This is the code for preprocessing the data 
 
 ```{r}
-setwd("/Users/AmirKh/Documents/R/Reproducible Research/project1")
+setwd("/Users/AmirKh/Documents/R/Reproducible.Research/project1")
 activity <- unzip("repdata-data-activity.zip")
 act<-read.csv(activity)
 rm(activity)
@@ -28,10 +34,10 @@ act.sum<-act.sum[is.na(act.sum$steps)==FALSE,]
 ```
 
 histogram of the total number of steps taken each day :
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 hist(act.sum$steps,xlab="Total number of steps taken each day",main="Histogram of the total steps taken each day")
 ```
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 steps_mean<-mean(act.sum$steps)
 steps_median<-median(act.sum$steps)
 ```
@@ -41,7 +47,7 @@ the median of the total number of steps taken per day is `r steps_median`.
 ##What is the average daily activity pattern?
 this is plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 act_avg<-aggregate(steps ~ interval, act, mean)
 with(act_avg, plot(interval,steps,type='l'))
 max_num<- act_avg$interval[which(act_avg$steps==max(act_avg$steps))]
@@ -54,7 +60,7 @@ the 5-minute interval, on average across all the days in the dataset, that conta
 ## Imputing missing values
 
 
-```{r,echo=FALSE}
+```{r,echo=TRUE}
 NA.sum<-sum(is.na(act))
 ```
 the total number of missing values in the dataset is `r NA.sum`
@@ -82,7 +88,7 @@ act_full.sum<-act_full.sum[is.na(act_full.sum$steps)==FALSE,]
 
 here is a histogram of the total number of steps taken each day
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 hist(act_full.sum$steps,xlab="Total number of steps taken each day",main="Histogram of the total steps taken each day")        
 mean_full<-mean(act_full.sum$steps)
 median_full<-median(act_full.sum$steps)
@@ -98,7 +104,7 @@ the median of total number of steps taken per day is `r median_full`
 ##Are there differences in activity patterns between weekdays and weekends?
 
 the plot below shows the differences in activity patterns between weekdays and weekends
-```{r,echo=FALSE}
+```{r,echo=TRUE}
 library(ggplot2) 
 act_full$date<-as.Date(act_full$date)
 act_full$wk_end<-as.factor(weekdays(act_full$date) %in% c("Saturday","Sunday"))
